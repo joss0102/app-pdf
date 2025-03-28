@@ -7,7 +7,7 @@ import org.springframework.web.client.RestTemplate;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.util.UriComponentsBuilder;
-
+// hola
 import java.io.IOException;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -17,15 +17,18 @@ public class PdfService {
 
     private static final String GOOGLE_BOOKS_API_URL = "https://www.googleapis.com/books/v1/volumes";
 
-    public String processPdf(MultipartFile file) {
+    public String processPdf(MultipartFile file, String bookTitle) {
         try {
-            String bookName = extractBookNameFromPdf(file);
+            if (bookTitle != null && !bookTitle.isEmpty()) {
+                return searchBookInGoogleBooks(bookTitle);
+            }
+            String extractedTitle = extractBookNameFromPdf(file);
 
-            if (bookName.isEmpty()) {
+            if (extractedTitle.isEmpty()) {
                 return "No se pudo encontrar un título en el PDF.";
             }
 
-            return searchBookInGoogleBooks(bookName);
+            return searchBookInGoogleBooks(extractedTitle);
         } catch (IOException e) {
             e.printStackTrace();
             return "Error al procesar el PDF.";
@@ -44,7 +47,8 @@ public class PdfService {
         text = text.replaceAll("\\s+", " ").trim(); // Eliminar espacios extra
 
         // Expresión regular para encontrar títulos en cualquier parte del PDF
-        Pattern titlePattern = Pattern.compile("(?m)^(?:[A-ZÁÉÍÓÚÑ][a-záéíóúñ]+(?:\\s+[A-ZÁÉÍÓÚÑa-záéíóúñ0-9]+){1,5})$");
+        Pattern titlePattern = Pattern
+                .compile("(?m)^(?:[A-ZÁÉÍÓÚÑ][a-záéíóúñ]+(?:\\s+[A-ZÁÉÍÓÚÑa-záéíóúñ0-9]+){1,5})$");
         Matcher matcher = titlePattern.matcher(text);
 
         while (matcher.find()) {
@@ -54,7 +58,7 @@ public class PdfService {
             }
         }
 
-        //  Si no encuentra un título, usa la línea más larga como posible título
+        // Si no encuentra un título, usa la línea más larga como posible título
         String[] lines = text.split("\\n");
         String longestLine = "";
         for (String line : lines) {
@@ -68,12 +72,23 @@ public class PdfService {
 
     private String searchBookInGoogleBooks(String bookName) {
         UriComponentsBuilder uriBuilder = UriComponentsBuilder.fromHttpUrl(GOOGLE_BOOKS_API_URL)
-                .queryParam("q", bookName)
-                .queryParam("maxResults", 5); // Limitar resultados
+                .queryParam("q", bookName);
 
         RestTemplate restTemplate = new RestTemplate();
         ResponseEntity<String> response = restTemplate.getForEntity(uriBuilder.toUriString(), String.class);
 
+        if (response.getStatusCode().is2xxSuccessful()) {
+            return response.getBody();
+        }
+
+        // Si la solicitud falla, intenta con el títolo sin acentos
+        String bookNameWithoutAccents = bookName.replaceAll("[áéíóú]", "a");
+        uriBuilder = UriComponentsBuilder.fromHttpUrl(GOOGLE_BOOKS_API_URL)
+                .queryParam("q", bookNameWithoutAccents);
+
+        response = restTemplate.getForEntity(uriBuilder.toUriString(), String.class);
+
         return response.getBody();
     }
+
 }

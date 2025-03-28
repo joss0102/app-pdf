@@ -3,7 +3,15 @@ document.getElementById("uploadForm").addEventListener("submit", function (event
 
     let formData = new FormData();
     let fileInput = document.getElementById("pdfFile");
+    let titleInput = document.getElementById("bookTitle");
+
+    // Agregar el archivo PDF
     formData.append("file", fileInput.files[0]);
+
+    // Agregar el título del libro (si lo proporciona el usuario)
+    if (titleInput.value.trim() !== "") {
+        formData.append("bookTitle", titleInput.value.trim());
+    }
 
     fetch("http://localhost:8080/upload", {
         method: "POST",
@@ -95,29 +103,29 @@ function selectBook(index) {
     resultContainer.innerHTML = ""; // Limpiar resultados anteriores
 
     let bookDiv = document.createElement("div");
-    bookDiv.classList.add("book-item"); // Clase para la estructura del libro seleccionado
-
+    bookDiv.classList.add("book-item");
+    // titulo
     let title = document.createElement("h3");
     title.classList.add("book-title");
     title.textContent = selectedBook.volumeInfo.title;
-
+    // autor
     let author = document.createElement("p");
     author.classList.add("book-author");
     author.textContent = `Autor(es): ${selectedBook.volumeInfo.authors ? selectedBook.volumeInfo.authors.join(', ') : 'Desconocido'}`;
-
+    // isbn
     let isbn = document.createElement("p");
     isbn.classList.add("book-author");
     let isbn13 = selectedBook.volumeInfo.industryIdentifiers?.find(id => id.type === "ISBN_13")?.identifier || 'No disponible';
     isbn.textContent = `ISBN-13: ${isbn13}`;
-
+    // páginas
     let pages = document.createElement("p");
     pages.classList.add("book-author");
     pages.textContent = `Páginas: ${selectedBook.volumeInfo.pageCount || 'No disponible'}`;
-
+    // editorial
     let publisher = document.createElement("p");
     publisher.classList.add("book-author");
     publisher.textContent = `Editorial: ${selectedBook.volumeInfo.publisher || 'No disponible'}`;
-
+    // imagen
     let img = document.createElement("img");
     img.classList.add("book-image");
     if (selectedBook.volumeInfo.imageLinks) {

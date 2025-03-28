@@ -10,11 +10,13 @@
 
 <body>
     <div class="container">
-        <!-- Formulario para subir PDF -->
+        <!-- Formulario para subir PDF y buscar libro por título -->
         <div class="upload-form">
             <h1>Subir un archivo PDF</h1>
             <form id="uploadForm">
                 <input type="file" id="pdfFile" name="file" accept="application/pdf" required>
+                <!-- Campo para ingresar el título -->
+                <input type="text" id="bookTitle" name="bookTitle" placeholder="Introduce un título (opcional)">
                 <button type="submit">Subir PDF</button>
             </form>
         </div>

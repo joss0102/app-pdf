@@ -21,7 +21,8 @@ public class PdfController {
     }
 
     @PostMapping
-    public ResponseEntity<Map<String, String>> uploadFile(@RequestParam("file") MultipartFile file) {
+    public ResponseEntity<Map<String, String>> uploadFile(@RequestParam("file") MultipartFile file,
+            @RequestParam(value = "bookTitle", required = false) String bookTitle) {
         Map<String, String> response = new HashMap<>();
 
         if (file.isEmpty()) {
@@ -29,7 +30,7 @@ public class PdfController {
             return ResponseEntity.badRequest().body(response);
         }
 
-        String result = pdfService.processPdf(file);
+        String result = pdfService.processPdf(file, bookTitle);
         response.put("message", result);
         return ResponseEntity.ok(response);
     }
