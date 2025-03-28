@@ -39,4 +39,4 @@ Este proyecto tiene como finalidad demostrar el uso de **procesamiento de archiv
 
 ---
 
-✨ Desarrollado por [Jose Ayrton Rosell Bonavina](https://github.com/joss.0102) ✨
+✨ Desarrollado por [Jose Ayrton Rosell Bonavina](https://github.com/joss0102) ✨
