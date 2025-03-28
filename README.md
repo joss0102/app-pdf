@@ -32,7 +32,10 @@ git clone https://github.com/tu-usuario/tu-repositorio.git
 - Inicia una sesion local del index.html
   - Rodumentariamente se puede usar liveServer en visual Studio Code
 - Sube un archivo PDF y opcionalmente ingresa un título de libro.
-
+- url de la api de prueba. Sustitulle NombreDelLibro por el libro que quieras buscar
+```
+https://www.googleapis.com/books/v1/volumes?q=NombreDelLibro
+```
 ## 🎯 Objetivo
 
 Este proyecto tiene como finalidad demostrar el uso de **procesamiento de archivos PDF**, **integración con APIs externas** y la creación de una **aplicación web funcional** enfocada en la extracción y consulta de información sobre libros.
