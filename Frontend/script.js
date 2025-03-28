@@ -24,30 +24,41 @@ document.getElementById("uploadForm").addEventListener("submit", function (event
                     let bookDiv = document.createElement("div");
                     bookDiv.classList.add("book-item");
 
-                    // titulo
+                    // Título
                     let title = document.createElement("h3");
                     title.classList.add("book-title");
                     title.textContent = book.volumeInfo.title;
 
-                    // autor
+                    // Autor
                     let author = document.createElement("p");
                     author.classList.add("book-author");
-                    author.innerHTML = `<strong>Autor(es):</strong> ${book.volumeInfo.authors ? book.volumeInfo.authors.join(', ') : 'Desconocido'}`;
+                    author.textContent = `Autor(es): ${book.volumeInfo.authors ? book.volumeInfo.authors.join(', ') : 'Desconocido'}`;
 
-                    // descripcion
-                    let description = document.createElement("p");
-                    description.classList.add("book-description");
-                    description.innerHTML = `<strong>Descripción:</strong> ${book.volumeInfo.description || 'No disponible'}`;
+                    // ISBN-13
+                    let isbn = document.createElement("p");
+                    isbn.classList.add("book-author");
+                    let isbn13 = book.volumeInfo.industryIdentifiers?.find(id => id.type === "ISBN_13")?.identifier || 'No disponible';
+                    isbn.textContent = `ISBN-13: ${isbn13}`;
 
-                    // imagen
+                    // Páginas
+                    let pages = document.createElement("p");
+                    pages.classList.add("book-author");
+                    pages.textContent = `Páginas: ${book.volumeInfo.pageCount || 'No disponible'}`;
+
+                    // Editorial
+                    let publisher = document.createElement("p");
+                    publisher.classList.add("book-author");
+                    publisher.textContent = `Editorial: ${book.volumeInfo.publisher || 'No disponible'}`;
+
+                    // Imagen
                     let img = document.createElement("img");
-                    img.classList.add("book-image");
+                    img.classList.add("book-author");
                     if (book.volumeInfo.imageLinks) {
-                        img.src = book.volumeInfo.imageLinks.smallThumbnail;
-                        img.alt = `Portada de ${book.volumeInfo.title}`;
+                        img.setAttribute("src", book.volumeInfo.imageLinks.smallThumbnail);
+                        img.setAttribute("alt", `Portada de ${book.volumeInfo.title}`);
                     }
 
-                    // botón
+                    // Botón de selección
                     let button = document.createElement("button");
                     button.classList.add("select-btn");
                     button.textContent = "Seleccionar";
@@ -57,7 +68,9 @@ document.getElementById("uploadForm").addEventListener("submit", function (event
                     bookDiv.appendChild(img);
                     bookDiv.appendChild(title);
                     bookDiv.appendChild(author);
-                    bookDiv.appendChild(description);
+                    bookDiv.appendChild(isbn);
+                    bookDiv.appendChild(pages);
+                    bookDiv.appendChild(publisher);
                     bookDiv.appendChild(button);
 
                     // Agregar el div al contenedor
@@ -90,29 +103,40 @@ function selectBook(index) {
 
     let author = document.createElement("p");
     author.classList.add("book-author");
-    author.innerHTML = `<strong>Autor(es):</strong> ${selectedBook.volumeInfo.authors ? selectedBook.volumeInfo.authors.join(', ') : 'Desconocido'}`;
+    author.textContent = `Autor(es): ${selectedBook.volumeInfo.authors ? selectedBook.volumeInfo.authors.join(', ') : 'Desconocido'}`;
 
-    let description = document.createElement("p");
-    description.classList.add("book-description");
-    description.innerHTML = `<strong>Descripción:</strong> ${selectedBook.volumeInfo.description || 'No disponible'}`;
+    let isbn = document.createElement("p");
+    isbn.classList.add("book-author");
+    let isbn13 = selectedBook.volumeInfo.industryIdentifiers?.find(id => id.type === "ISBN_13")?.identifier || 'No disponible';
+    isbn.textContent = `ISBN-13: ${isbn13}`;
+
+    let pages = document.createElement("p");
+    pages.classList.add("book-author");
+    pages.textContent = `Páginas: ${selectedBook.volumeInfo.pageCount || 'No disponible'}`;
+
+    let publisher = document.createElement("p");
+    publisher.classList.add("book-author");
+    publisher.textContent = `Editorial: ${selectedBook.volumeInfo.publisher || 'No disponible'}`;
 
     let img = document.createElement("img");
     img.classList.add("book-image");
     if (selectedBook.volumeInfo.imageLinks) {
-        img.src = selectedBook.volumeInfo.imageLinks.smallThumbnail;
-        img.alt = `Portada de ${selectedBook.volumeInfo.title}`;
+        img.setAttribute("src", selectedBook.volumeInfo.imageLinks.smallThumbnail);
+        img.setAttribute("alt", `Portada de ${selectedBook.volumeInfo.title}`);
     }
 
     let link = document.createElement("a");
-    link.href = selectedBook.volumeInfo.previewLink;
+    link.setAttribute("href", selectedBook.volumeInfo.previewLink);
     link.textContent = "Ver más detalles";
-    link.target = "_blank";
+    link.setAttribute("target", "_blank");
 
     // Agregar elementos al contenedor del libro seleccionado
     bookDiv.appendChild(img);
     bookDiv.appendChild(title);
     bookDiv.appendChild(author);
-    bookDiv.appendChild(description);
+    bookDiv.appendChild(isbn);
+    bookDiv.appendChild(pages);
+    bookDiv.appendChild(publisher);
     bookDiv.appendChild(link);
 
     resultContainer.appendChild(bookDiv);
