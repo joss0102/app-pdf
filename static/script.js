@@ -13,14 +13,14 @@ document.getElementById("uploadForm").addEventListener("submit", function (event
         formData.append("bookTitle", titleInput.value.trim());
     }
 
-    fetch("http://localhost:8080/upload", {
+    fetch("http://localhost:8000/upload", {
         method: "POST",
         body: formData
     })
         .then(response => response.json())
         .then(data => {
             console.log("Respuesta:", data);
-            let bookInfo = JSON.parse(data.message); // Convertir la respuesta en objeto JSON
+            let bookInfo = data.message; // Si ya es un objeto, no es necesario hacer JSON.parse()
             let resultContainer = document.getElementById("resultMessage");
             resultContainer.innerHTML = ""; // Limpiar resultados previos
             resultContainer.classList.add("result-container");
@@ -125,6 +125,11 @@ function selectBook(index) {
     let publisher = document.createElement("p");
     publisher.classList.add("book-author");
     publisher.textContent = `Editorial: ${selectedBook.volumeInfo.publisher || 'No disponible'}`;
+
+     // descripcion
+     let description = document.createElement("p");
+     description.classList.add("book-description");
+     description.textContent = `Editorial: ${selectedBook.volumeInfo.description || 'No disponible'}`;
     // imagen
     let img = document.createElement("img");
     img.classList.add("book-image");
@@ -133,10 +138,6 @@ function selectBook(index) {
         img.setAttribute("alt", `Portada de ${selectedBook.volumeInfo.title}`);
     }
 
-    let link = document.createElement("a");
-    link.setAttribute("href", selectedBook.volumeInfo.previewLink);
-    link.textContent = "Ver más detalles";
-    link.setAttribute("target", "_blank");
 
     // Agregar elementos al contenedor del libro seleccionado
     bookDiv.appendChild(img);
@@ -145,7 +146,7 @@ function selectBook(index) {
     bookDiv.appendChild(isbn);
     bookDiv.appendChild(pages);
     bookDiv.appendChild(publisher);
-    bookDiv.appendChild(link);
+    bookDiv.appendChild(description);
 
     resultContainer.appendChild(bookDiv);
 }

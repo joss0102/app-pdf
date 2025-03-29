@@ -26,11 +26,18 @@ git clone https://github.com/tu-usuario/tu-repositorio.git
 
 2. **Ejecutar la aplicación**
 
-- Asegúrate de tener **Java 17+** y **Maven** instalados.
-- Dentro del directorio del proyecto, ejecuta:
-  ```
-  mvn spring-boot:run
-  ```
+Instalar dependencias:
+
+```
+pip install fastapi uvicorn python-multipart pdfplumber requests
+
+```
+
+Instalar dependencias para requirements
+
+```
+pip install -r requirements.txt
+```
 
 3. **Usar la API**
 
