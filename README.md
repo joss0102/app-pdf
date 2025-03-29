@@ -1,6 +1,6 @@
 # Proyecto de Extracción de Información de Libros desde PDF
 
-Este proyecto es una aplicación web que permite a los usuarios subir archivos PDF y extraer información relevante sobre libros. Utiliza **Java Spring** en el backend y la **API de Google Books** para obtener detalles adicionales.
+Este proyecto es una aplicación web que permite a los usuarios subir archivos PDF y extraer información relevante sobre libros a partir de un titulo. Utiliza **Java Spring** en el backend y la **API de Google Books** para obtener detalles adicionales.
 
 ## 🚀 Características
 
