@@ -19,7 +19,7 @@ Este proyecto es una aplicación web que permite a los usuarios subir archivos P
 ## 📌 Instalación y Uso
 1. **Asegurarse de tener instalado python en el equipo**
 
-[Python (https://www.python.org/downloads/)]
+[Python](https://www.python.org/downloads/)
 
 2. . **Clonar el repositorio**
 
