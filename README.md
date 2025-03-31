@@ -66,3 +66,19 @@ Este proyecto tiene como finalidad demostrar el uso de **procesamiento de archiv
 ---
 
 ✨ Desarrollado por [Jose Ayrton Rosell Bonavina](https://github.com/joss0102) ✨
+
+APP_PDF/
+│── backend
+│    │── config/
+│    │   ├── cors.py               # Configuración de CORS
+│    │── services/
+│    │   ├── pdf_service.py        # Lógica de procesamiento del PDF
+│    │   ├── google_books.py       # Comunicación con la API de Google Books
+│    │── main.py                  # Punto de entrada de la API
+│    │── requirements.txt          # Dependencias del proyecto
+│── frontend
+│    │── public/
+│    │   ├── index.html            # Archivo HTML del frontend
+│    │   ├── script.js             # JavaScript del frontend
+│    │   ├── styles.css            # Estilos CSS
+│── requirements.txt          # Dependencias del proyecto
