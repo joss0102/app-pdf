@@ -17,14 +17,15 @@ Este proyecto es una aplicación web que permite a los usuarios subir archivos P
 - **HTML, CSS y JavaScript** - Para la interfaz de usuario.
 
 ## 📌 Instalación y Uso
-
-1. **Clonar el repositorio**
+1. Asegurarse de tener instalado python en el equipo
+[Python (https://www.python.org/downloads/)]
+3. **Clonar el repositorio**
 
 ```bash
 git clone https://github.com/tu-usuario/tu-repositorio.git
 ```
 
-2. **Dependencias**
+3. **Dependencias**
 
 Instalar dependencias:
 
@@ -38,7 +39,7 @@ Instalar dependencias desde `requirements.txt`:
 pip install -r requirements.txt
 ```
 
-3. **Usar la APP**
+4. **Usar la APP**
 
 - Inicia el servidor backend de FastAPI. Para hacerlo, abre una terminal y ejecuta el siguiente comando en la raíz del proyecto:
 
