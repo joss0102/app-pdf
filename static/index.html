@@ -1,39 +1,52 @@
 <!DOCTYPE html>
 <html lang="es">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Subir PDF</title>
-    <link rel="stylesheet" href="styles.css" />
-  </head>
 
-  <body>
-    <div class="container">
-      <!-- Formulario para subir PDF y buscar libro por título -->
-      <div class="upload-form">
-        <h1>Subir un archivo PDF</h1>
-        <form id="uploadForm">
-          <input
-            type="file"
-            id="pdfFile"
-            name="file"
-            accept="application/pdf"
-            required
-          />
-          <!-- Campo para ingresar el título -->
-          <input
-            type="text"
-            id="bookTitle"
-            name="bookTitle"
-            placeholder="Introduce un título (opcional)"
-          />
-          <button type="submit">Subir PDF</button>
-        </form>
-      </div>
-      <!-- Contenedor de resultados del libro -->
-      <div id="resultMessage" class="result-container"></div>
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Book Finder | Subir PDF</title>
+  <link rel="stylesheet" href="styles.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+
+<section class="section">
+  <div class="app-container">
+    <div class="app-section">
+      <h1><i class="fas fa-book-open"></i> Book Finder</h1>
+      <p class="subtitle">Sube un PDF o busca un libro por título</p>
     </div>
 
-    <script src="script.js"></script>
-  </body>
+    <div class="main-content">
+      <!-- Formulario para subir PDF y buscar libro por título -->
+      <div class="upload-card">
+        <form id="uploadForm" class="upload-form">
+          <div class="file-input-container">
+            <label for="pdfFile" class="file-input-label">
+              <i class="fas fa-cloud-upload-alt"></i>
+              <span id="file-name">Selecciona un archivo PDF</span>
+              <input type="file" id="pdfFile" name="file" accept="application/pdf" required />
+            </label>
+          </div>
+
+          <div class="input-group">
+            <i class="fas fa-search"></i>
+            <input type="text" id="bookTitle" name="bookTitle" placeholder="Introduce un título (opcional)"
+              class="modern-input" />
+          </div>
+
+          <button type="submit" class="primary-button">
+            <i class="fas fa-upload"></i> Subir PDF
+          </button>
+        </form>
+      </div>
+
+      <!-- Contenedor de resultados del libro -->
+      <div id="resultMessage" class="results-container"></div>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+</section>
+
 </html>
