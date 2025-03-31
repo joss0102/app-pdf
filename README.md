@@ -17,9 +17,11 @@ Este proyecto es una aplicación web que permite a los usuarios subir archivos P
 - **HTML, CSS y JavaScript** - Para la interfaz de usuario.
 
 ## 📌 Instalación y Uso
-1. Asegurarse de tener instalado python en el equipo
+1. **Asegurarse de tener instalado python en el equipo**
+
 [Python (https://www.python.org/downloads/)]
-3. **Clonar el repositorio**
+
+2. . **Clonar el repositorio**
 
 ```bash
 git clone https://github.com/tu-usuario/tu-repositorio.git
@@ -27,13 +29,13 @@ git clone https://github.com/tu-usuario/tu-repositorio.git
 
 3. **Dependencias**
 
-Instalar dependencias:
+3.1 Instalar dependencias:
 
 ```bash
 pip install fastapi uvicorn python-multipart pdfplumber requests
 ```
 
-Instalar dependencias desde `requirements.txt`:
+3.2 Instalar dependencias desde `requirements.txt`:
 
 ```bash
 pip install -r requirements.txt
